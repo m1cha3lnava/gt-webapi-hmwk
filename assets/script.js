@@ -75,14 +75,12 @@ var questionArray = [
   },
 ];
 
-
-
 currentQuestion++;
 
 /* questionArray[currentQuestion].questionText; */
 
 /* Logic for questions */
-for (var i = 0; i < questionArray.length; i++){
+for (var i = 0; i < questionArray.length; i++) {
   if (questionArray[i].answersArray[2] === questionArray[i].correctAnswer) {
     console.log("that answer is correct");
   } else {
