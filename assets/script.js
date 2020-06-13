@@ -66,7 +66,7 @@ var questionArray = [
       "3. quotes",
       "4. parentheses",
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
   },
   {
     questionText:
@@ -77,7 +77,7 @@ var questionArray = [
       "3. for loops",
       "4. console.log",
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
   },
 ];
 
@@ -119,6 +119,19 @@ startButton.addEventListener("click", function () {
 });
 
 function questionCheck() {
+
+/*   console.log("question index " + questionArray[currentQuestion].questionText);
+  console.log("currentQuestion" + currentQuestion);
+  console.log("buttonclicked value: " + buttonClicked);
+  console.log("answer index " + questionArray[currentQuestion].correctAnswer);
+  console.log("correctanswer" + questionArray[currentQuestion].correctAnswer); */
+  
+  if (currentQuestion > questionArray.length-1) {    
+    secondDisappear();
+    currentQuestion = 0;
+    return;
+  }
+
   document.querySelector("#questionHead").innerHTML =
     "<h2>" + questionArray[currentQuestion].questionText + "</h2>";
   document.querySelector("#answerOption1").innerHTML =
@@ -131,13 +144,13 @@ function questionCheck() {
     questionArray[currentQuestion].answersArray[3];
   document.querySelector("#resultP").innerHTML = "";
   
-  if (currentQuestion === questionArray.length - 1) {
-    currentQuestion = 0;
-    secondDisappear();
+  if (questionArray[currentQuestion].correctAnswer === buttonClicked){
+    console.log("correct");
+    score++;
+    console.log("score= " + score)
   }
-  console.log(questionArray[currentQuestion].questionText);
-  console.log(currentQuestion);
   currentQuestion++;
+  console.log("======================");
 
   /*   if (
     questionArray.questionText[currentQuestion].correctAnswer === buttonClicked
@@ -155,36 +168,33 @@ function questionCheck() {
   } */
 }
 
-function nextQuestion() {
-  currentQuestion++;
-}
 
 /* Logic for questions */
 /* question 1 */
 
 answerOption1.addEventListener("click", function () {
   buttonClicked = 0;
-  console.log("button1");
+  /* console.log("button1"); */
   questionCheck();
-  console.log(currentQuestion);
+  /* console.log(currentQuestion); */
 });
 answerOption2.addEventListener("click", function () {
   buttonClicked = 1;
-  console.log("button2");
+  /* console.log("button2"); */
   questionCheck();
-  console.log(currentQuestion);
+  /* console.log(currentQuestion); */
 });
 answerOption3.addEventListener("click", function () {
   buttonClicked = 2;
-  console.log("button3");
+  /* console.log("button3"); */
   questionCheck();
-  console.log(currentQuestion);
+  /* console.log(currentQuestion); */
 });
 answerOption4.addEventListener("click", function () {
   buttonClicked = 3;
-  console.log("button4");
+  /* console.log("button4"); */
   questionCheck();
-  console.log(currentQuestion);
+  /* console.log(currentQuestion); */
 });
 
 /* console.log(questionArray[currentQuestion].answersArray[1])
