@@ -19,9 +19,11 @@ var playerInputScreen = document.querySelector("#playerInputScreen");
 var welcomeScreen = document.querySelector("welcomeScreen");
 var playerInputScreen = document.querySelector("playerInputScreen");
 var highScoreScreen = document.querySelector("highScoreScreen");
-var answerChoices = document.querySelector("answerChoices")
+var answerChoices = document.querySelector("answerChoices");
+var resultP = document.querySelector("resultP");
 var score = 0;
 var currentQuestion = 0;
+var buttonClicked = "";
 
 var highScores = {
   firstPlace: "MN",
@@ -91,7 +93,6 @@ function initializePage() {
 initializePage();
 
 function firstDisappear() {
-  
   document.querySelector("#welcomeScreen").classList.add("none");
   document.querySelector("#questionsBody").classList.remove("none");
   document.querySelector("#playerInputScreen").classList.add("none");
@@ -114,45 +115,80 @@ function thirdDisappear() {
 
 startButton.addEventListener("click", function () {
   firstDisappear();
+  questionCheck();
 });
 
-document.querySelector("#questionHead").innerHTML =
-  "<h2>" + questionArray[currentQuestion].questionText + "</h2>";
-document.querySelector("#answerOption1").innerHTML =
-  "<button class='btn'>" +
-  questionArray[currentQuestion].answersArray[0] +
-  "</button>";
-document.querySelector("#answerOption2").innerHTML =
-  questionArray[currentQuestion].answersArray[1];
-document.querySelector("#answerOption3").innerHTML =
-  questionArray[currentQuestion].answersArray[2];
-document.querySelector("#answerOption4").innerHTML =
-  questionArray[currentQuestion].answersArray[3];
+function questionCheck() {
+  document.querySelector("#questionHead").innerHTML =
+    "<h2>" + questionArray[currentQuestion].questionText + "</h2>";
+  document.querySelector("#answerOption1").innerHTML =
+    questionArray[currentQuestion].answersArray[0];
+  document.querySelector("#answerOption2").innerHTML =
+    questionArray[currentQuestion].answersArray[1];
+  document.querySelector("#answerOption3").innerHTML =
+    questionArray[currentQuestion].answersArray[2];
+  document.querySelector("#answerOption4").innerHTML =
+    questionArray[currentQuestion].answersArray[3];
+  document.querySelector("#resultP").innerHTML = "";
+  
+  if (currentQuestion === questionArray.length - 1) {
+    currentQuestion = 0;
+    secondDisappear();
+  }
+  console.log(questionArray[currentQuestion].questionText);
+  console.log(currentQuestion);
+  currentQuestion++;
 
+  /*   if (
+    questionArray.questionText[currentQuestion].correctAnswer === buttonClicked
+  ) {
+    console.log("correct");
+    currentQuestion++;
+    console.log(questionArray.questionText[currentQuestion]);
+  } else if (
+    questionArray.questionText[currentQuestion].correctAnswer != buttonClicked
+  ) {
+    console.log("incorrect");
+    currentQuestion++;
+  } else {
+    console.log("error");
+  } */
+}
 
 function nextQuestion() {
   currentQuestion++;
 }
+
 /* Logic for questions */
 /* question 1 */
-document
-  .querySelector("#answerOption1")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-    if (
-      document.querySelector("answerOption1").innerHTML ===
-      questionArray[currentQuestion].answersArray[
-        questionArray[currentQuestion].correctAnswer
-      ]
-    ) {
-      score++;
-      currentQuestion++;
-      nextQuestion();
-    }
-    //hide all the elements
-  });
 
+answerOption1.addEventListener("click", function () {
+  buttonClicked = 0;
+  console.log("button1");
+  questionCheck();
+  console.log(currentQuestion);
+});
+answerOption2.addEventListener("click", function () {
+  buttonClicked = 1;
+  console.log("button2");
+  questionCheck();
+  console.log(currentQuestion);
+});
+answerOption3.addEventListener("click", function () {
+  buttonClicked = 2;
+  console.log("button3");
+  questionCheck();
+  console.log(currentQuestion);
+});
+answerOption4.addEventListener("click", function () {
+  buttonClicked = 3;
+  console.log("button4");
+  questionCheck();
+  console.log(currentQuestion);
+});
 
+/* console.log(questionArray[currentQuestion].answersArray[1])
+console.log(questionArray[currentQuestion].correctAnswer) */
 
 /* if (
   questionArray[currentQuestion].answersArray[2] ===
