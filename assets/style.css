@@ -6,3 +6,7 @@
   width: 100%;
   background-color: rgb(247, 174, 247);
 }
+
+.none{
+    display:none;
+}
