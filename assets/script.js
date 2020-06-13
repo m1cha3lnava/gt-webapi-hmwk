@@ -14,11 +14,15 @@ WHEN the game is over
 THEN I can save my initials and score */
 
 //Declare variables
-var instructionHeading = document.querySelector("#instructionHeading");
-var questionHeading = document.querySelector("#questionHeading");
-var questionPar = document.querySelector("#questionPar");
+var questionsBody = document.querySelector("#questionsBody");
+var playerInputScreen = document.querySelector("#playerInputScreen");
+var welcomeScreen = document.querySelector("welcomeScreen");
+var playerInputScreen = document.querySelector("playerInputScreen");
+var highScoreScreen = document.querySelector("highScoreScreen");
+var answerChoices = document.querySelector("answerChoices")
 var score = 0;
 var currentQuestion = 0;
+
 var highScores = {
   firstPlace: "MN",
   secondPlace: "GG",
@@ -75,20 +79,86 @@ var questionArray = [
   },
 ];
 
-currentQuestion++;
+/* Page intialization */
 
-/* questionArray[currentQuestion].questionText; */
+function initializePage() {
+  document.querySelector("#questionsBody").classList.add("none");
+  document.querySelector("#playerInputScreen").classList.add("none");
+  /* document.querySelector("#welcomeScreen").classList.add("none"); */
+  document.querySelector("#playerInputScreen").classList.add("none");
+  document.querySelector("#highScoreScreen").classList.add("none");
+}
+initializePage();
 
-/* Logic for questions */
-for (var i = 0; i < questionArray.length; i++) {
-  if (questionArray[i].answersArray[2] === questionArray[i].correctAnswer) {
-    console.log("that answer is correct");
-  } else {
-    console.log("that answer is incorrect " + i);
-  }
+function firstDisappear() {
+  
+  document.querySelector("#welcomeScreen").classList.add("none");
+  document.querySelector("#questionsBody").classList.remove("none");
+  document.querySelector("#playerInputScreen").classList.add("none");
+  document.querySelector("#highScoreScreen").classList.add("none");
+}
+function secondDisappear() {
+  document.querySelector("#welcomeScreen").classList.add("none");
+  document.querySelector("#questionsBody").classList.add("none");
+  document.querySelector("#playerInputScreen").classList.remove("none");
+  document.querySelector("#highScoreScreen").classList.add("none");
+}
+function thirdDisappear() {
+  document.querySelector("#welcomeScreen").classList.add("none");
+  document.querySelector("#questionsBody").classList.add("none");
+  document.querySelector("#playerInputScreen").classList.add("none");
+  document.querySelector("#highScoreScreen").classList.remove("none");
 }
 
-/* create space for question and answers */
-/* document.querySelector("#questionPar").innerHTML =
-  "<div>some other other thing</div>"; */
-/* Event listeners */
+/* Click start button */
+
+startButton.addEventListener("click", function () {
+  firstDisappear();
+});
+
+document.querySelector("#questionHead").innerHTML =
+  "<h2>" + questionArray[currentQuestion].questionText + "</h2>";
+document.querySelector("#answerOption1").innerHTML =
+  "<button class='btn'>" +
+  questionArray[currentQuestion].answersArray[0] +
+  "</button>";
+document.querySelector("#answerOption2").innerHTML =
+  questionArray[currentQuestion].answersArray[1];
+document.querySelector("#answerOption3").innerHTML =
+  questionArray[currentQuestion].answersArray[2];
+document.querySelector("#answerOption4").innerHTML =
+  questionArray[currentQuestion].answersArray[3];
+
+
+function nextQuestion() {
+  currentQuestion++;
+}
+/* Logic for questions */
+/* question 1 */
+document
+  .querySelector("#answerOption1")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    if (
+      document.querySelector("answerOption1").innerHTML ===
+      questionArray[currentQuestion].answersArray[
+        questionArray[currentQuestion].correctAnswer
+      ]
+    ) {
+      score++;
+      currentQuestion++;
+      nextQuestion();
+    }
+    //hide all the elements
+  });
+
+
+
+/* if (
+  questionArray[currentQuestion].answersArray[2] ===
+  questionArray[i].correctAnswer
+) {
+  console.log("that answer is correct");
+} else {
+  console.log("that answer is incorrect " + i);
+} */
